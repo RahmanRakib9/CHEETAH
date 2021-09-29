@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import firebase from 'firebase/compat/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseConfig from './FirebaseConfig';
 import { Form, Button, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +11,8 @@ firebase.initializeApp(firebaseConfig);
 
 
 const Login = () => {
-
+     //state for new user
+     const [newUser, setNewUser] = useState(false);
      const [user, setUser] = useState({
           userLogin: false,
           userName: '',
@@ -37,6 +38,13 @@ const Login = () => {
                })
      }
 
+     //null value
+     function handleNullValue() {
+          document.getElementById('userName').value = '';
+          document.getElementById('userEmail').value = '';
+          document.getElementById('userPassword').value = '';
+     }
+
      const handleBlur = (e) => {
           let isFieldValid = true;
           if (e.target.name === 'email') {
@@ -55,6 +63,7 @@ const Login = () => {
      }
 
      const handleFormSubmit = (e) => {
+          //create new user
           if (user.email && user.password) {
                const auth = getAuth();
                createUserWithEmailAndPassword(auth, user.email, user.password)
@@ -63,6 +72,25 @@ const Login = () => {
                          userInfo.userSuccess = true;
                          userInfo.userError = '';
                          setUser(userInfo);
+                         handleNullValue();
+                    })
+                    .catch((err) => {
+                         const userInfo = { ...user };
+                         userInfo.userSuccess = false;
+                         userInfo.userError = err.message;
+                         setUser(userInfo);
+                    })
+          }
+          if (!newUser && user.email && user.password) {
+               //login existing user
+               const auth = getAuth();
+               signInWithEmailAndPassword(auth, user.email, user.password)
+                    .then((res) => {
+                         const userInfo = { ...user };
+                         userInfo.userSuccess = true;
+                         userInfo.userError = '';
+                         setUser(userInfo);
+                         // handleNullValue();
                     })
                     .catch((err) => {
                          const userInfo = { ...user };
@@ -75,26 +103,41 @@ const Login = () => {
      }
 
      return (
-          <div style={{ marginTop: "5%" }}>
-               <Container>
-                    <Form style={{ color: 'white' }} onSubmit={handleFormSubmit}>
-                         <Form.Label>Name</Form.Label>
-                         <Form.Control type="text" name='name' required placeholder="Enter Your Name" onBlur={handleBlur} />
-                         <Form.Label>Email</Form.Label>
-                         <Form.Control type="email" name='email' required placeholder="Enter Your Email" onBlur={handleBlur} />
-                         <Form.Label>Password</Form.Label>
-                         <Form.Control type="password" name='password' required placeholder="Enter Your Password" onBlur={handleBlur} />
-                         <Button variant='secondary' type='submit' style={{ marginTop: "10px" }}>Submit</Button>
-                    </Form>
-                    {
-                         user.userSuccess ? <p style={{ color: 'green', textAlign: 'center' }}>"Succsessfully Created!"</p> : <p style={{ color: 'red', textAlign: 'center' }}>{user.userError}</p>
-                    }
-               </Container>
-               <p style={{ textAlign: 'center', color: 'white' }}>OR</p>
-               <div className='d-flex justify-content-center align-items-center'>
-                    <button onClick={GoogleSignIn} ><FontAwesomeIcon icon={faGoogle} /> Login With Google</button>
+          <Container>
+               <div className='row' style={{ marginTop: '10%' }}>
+                    <div className="col-md-2">
+                         <ul style={{ color: "white", backgroundColor: '#1a1a1a', borderRadius: '5%' }}>
+                              <li><small>Passwords must be at least 6 characters.</small></li>
+                              <li><small>Passwords must be contain at least 1 numeric digit <span style={{ color: 'orange' }}>(Example: abcdef7)</span></small></li>
+                              <li><small>Email address should be valid.</small></li>
+                              <li><small> <a href="https://www.facebook.com/ra.kib.9655806" target='_blank' style={{ color: 'white' }}>Need help?</a></small></li>
+                         </ul>
+                    </div>
+                    <div className="col-md-10">
+                         <div style={{ textAlign: "center" }}>
+                              <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
+                              <label htmlFor="newUser" style={{ color: 'white' }}>{newUser ? 'Create a account' : 'Dont have any account?'}</label>
+                         </div>
+                         <Form style={{ color: 'white', }} onSubmit={handleFormSubmit}>
+                              {newUser && <Form.Label>Name</Form.Label>}
+                              {newUser && <Form.Control type="text" name='name' required placeholder="Enter Your Name" onBlur={handleBlur} id='userName' />}
+                              <Form.Label>Email</Form.Label>
+                              <Form.Control type="email" name='email' required placeholder="Enter Your Email" onBlur={handleBlur} id='userEmail' />
+                              <Form.Label>Password</Form.Label>
+                              <Form.Control type="password" name='password' required placeholder="Enter Your Password" onBlur={handleBlur} id='userPassword' />
+                              <Button variant='secondary' type='submit' style={{ marginTop: "10px" }}>{newUser ? 'Submit' : 'LogIn'}</Button>
+                         </Form>
+                         {
+                              user.userSuccess ? <p style={{ color: 'green', textAlign: 'center' }}>"Succsessfully {newUser ? 'Created' : 'LoggedIn'}!"</p> : <p style={{ color: 'red', textAlign: 'center' }}>{user.userError}</p>
+                         }
+
+                         <p style={{ textAlign: 'center', color: 'white' }}>OR</p>
+                         <div className='d-flex justify-content-center align-items-center'>
+                              <Button variant="secondary" size="lg" onClick={GoogleSignIn} ><FontAwesomeIcon icon={faGoogle} /> Login With Google</Button>
+                         </div>
+                    </div>
                </div>
-          </div>
+          </Container>
      );
 };
 
