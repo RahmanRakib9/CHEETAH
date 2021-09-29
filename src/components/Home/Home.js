@@ -12,8 +12,8 @@ const Home = () => {
           setVehicles(fakeData)
      }, [])
      return (
-          <Container className='App App-header' style={{width:'100%'}}>
-               <Row >
+          <Container className='App App-header ' >
+               <Row className=' row-cols-1 row-cols-md-3 mx-1'>
                     {
                          vehicles.map(x => <Vehicle x={x} key={x.id}></Vehicle>)
                     }
@@ -24,8 +24,3 @@ const Home = () => {
 };
 
 export default Home;
-{/* <div className="App">
-<header className="App-header">
-  <img src={logo} className="App-logo" alt="logo" />
-</header>
-</div> */}

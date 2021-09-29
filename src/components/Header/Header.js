@@ -6,21 +6,23 @@ import './Header.css'
 const Header = () => {
      const linkActiveStyle = {
           color: 'white',
-          marginLeft: '10%',
+          marginLeft: '30px',
           fontWeight: "bold",
-          textDecoration:'none'
+          textDecoration: 'none'
      }
      return (
-          <Navbar >
-               <Container>
-                    <NavLink to="/" style={{color:'white',fontWeight:'bold',textDecoration:'none'}}>CHEETAH</NavLink>
+          <Container>
+               <Navbar >
+
+                    <NavLink to="/" style={{ color: 'white', fontWeight: 'bold', textDecoration: 'none' }}>CHEETAH</NavLink>
                     <Nav >
                          <NavLink to="/home" style={linkActiveStyle}>Home</NavLink>
                          <NavLink to="/login" style={linkActiveStyle}>Login</NavLink>
                          <NavLink to="/destination" style={linkActiveStyle}>Destination</NavLink>
                     </Nav>
-               </Container>
-          </Navbar>
+
+               </Navbar>
+          </Container>
      );
 };
 

@@ -10,23 +10,23 @@ const Vehicle = (props) => {
           history.push(`/book/${vehicleId}`)
      }
      return (
+          <Container >
+               <Col className='d-flex justify-content-center align-items-center'>
 
-          <Col >
-               <Container >
-                    <Card style={{width:'100%',marginTop:"5%"}}>
+                    <Card style={{ width: '22rem', marginTop: "3%" }} >
                          <Card.Img variant="top" src={img} style={{ width: "100%", height: "300px" }} />
                          <Card.Body>
-                              <Card.Title>Card Title</Card.Title>
+                              <Card.Title>{name}</Card.Title>
                               <Card.Text>
                                    Some quick example text to build on the card title and make up the bulk of
                                    the card's content.
                               </Card.Text>
-                              <Button variant="primary">Go somewhere</Button>
+                              <Button variant="secondary" onClick={() => handleClick(name)}>Book</Button>
                          </Card.Body>
                     </Card>
-               </Container>
-          </Col>
 
+               </Col>
+          </Container>
 
      );
 };

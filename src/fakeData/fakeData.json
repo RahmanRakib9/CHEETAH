@@ -1,20 +1,20 @@
 [
      {
-          "name": "bike",
+          "name": "Bike",
           "img": "https://i.ibb.co/ZfPmZJm/shutterstock-1526149508-3.jpg",
           "description": "abc",
           "capacity": "1",
           "id": "1"
      },
      {
-          "name": "car",
+          "name": "Car",
           "img": "https://i.ibb.co/DKdJLSP/car1.jpg",
           "description": "abc",
           "capacity": "3",
           "id": "2"
      },
      {
-          "name": "minibus",
+          "name": "Minibus",
           "img": "https://i.ibb.co/7kDjffh/minibus1.jpg",
           "description": "abc",
           "capacity": "6",
