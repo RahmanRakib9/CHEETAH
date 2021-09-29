@@ -2,9 +2,11 @@ import React from 'react';
 import { Card, Button, Col, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import '../../../App.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUsers } from '@fortawesome/free-solid-svg-icons'
 
 const Vehicle = (props) => {
-     const { img, name } = props.x;
+     const { img, name, capacity,price } = props.x;
      const history = useHistory();
      const handleClick = (vehicleId) => {
           history.push(`/book/${vehicleId}`)
@@ -18,8 +20,8 @@ const Vehicle = (props) => {
                          <Card.Body>
                               <Card.Title>{name}</Card.Title>
                               <Card.Text>
-                                   Some quick example text to build on the card title and make up the bulk of
-                                   the card's content.
+                                   <h3><FontAwesomeIcon icon={faUsers} />: {capacity}</h3>
+                                   <h3>৳: {price}</h3>
                               </Card.Text>
                               <Button variant="secondary" onClick={() => handleClick(name)}>Book</Button>
                          </Card.Body>
