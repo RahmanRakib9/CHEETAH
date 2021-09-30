@@ -18,7 +18,7 @@ const Header = () => {
                     <Nav >
                          <NavLink to="/home" style={linkActiveStyle}>Home</NavLink>
                          <NavLink to="/login" style={linkActiveStyle}>Login</NavLink>
-                         <NavLink to="/destination" style={linkActiveStyle}>Destination</NavLink>
+                         <NavLink to="/book" style={linkActiveStyle}>Destination</NavLink>
                     </Nav>
 
                </Navbar>

@@ -1,29 +1,40 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-import Book from "./components/Book/Book";
 
+import Destination from "./components/Destination/Destination";
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound'
 import Login from './components/Login/Login'
+import PrivateRoute from "./components/Login/PrivateRoute";
+
+export const UserContext = createContext();
 
 const App = () => {
+  const [loggedInUser, setLoggedInUser] = useState({})
   return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/home' component={Home} />
-        <Route path='/login' component={Login} />
-        <Route path='/book/:vehicleType' component={Book} />
-        <Route path='*' component={NotFound} />
-      </Switch>
-    </Router>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <Router>
+        <Header />
+        <p style={{ color: 'red ' }}>
+          email: {loggedInUser.userEmail}
+        </p>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/home' component={Home} />
+          <Route path='/login' component={Login} />
+          <PrivateRoute path='/book/:vehicleType' >
+            <Destination></Destination>
+          </PrivateRoute>
+          <Route path='*' component={NotFound} />
+        </Switch>
+      </Router>
+    </UserContext.Provider>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import firebase from 'firebase/compat/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseConfig from './FirebaseConfig';
@@ -6,9 +6,10 @@ import { Form, Button, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import '../../App.css'
+import { UserContext } from '../../App';
+import { useHistory, useLocation } from 'react-router';
 
 firebase.initializeApp(firebaseConfig);
-
 
 const Login = () => {
      //state for new user
@@ -23,18 +24,29 @@ const Login = () => {
           userSuccess: false
      })
 
+     //use context
+     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+     //for redirect user destination
+     let history = useHistory();
+     let location = useLocation();
+     let { from } = location.state || { from: { pathname: "/" } };
+
      const GoogleSignIn = () => {
           const provider = new GoogleAuthProvider();
           const auth = getAuth();
           signInWithPopup(auth, provider)
                .then((res) => {
                     const { displayName, email, photoURL } = res.user;
-                    setUser({
+                    const userInfo = {
                          userLogin: true,
                          userName: displayName,
                          userEmail: email,
                          userPhoto: photoURL
-                    })
+                    }
+                    setUser(userInfo);
+                    setLoggedInUser(userInfo);
+                    history.replace(from);
                })
      }
 
@@ -73,6 +85,9 @@ const Login = () => {
                          userInfo.userError = '';
                          setUser(userInfo);
                          handleNullValue();
+                         setLoggedInUser(userInfo);
+                         history.replace(from);
+
                     })
                     .catch((err) => {
                          const userInfo = { ...user };
@@ -91,6 +106,9 @@ const Login = () => {
                          userInfo.userError = '';
                          setUser(userInfo);
                          // handleNullValue();
+                         setLoggedInUser(userInfo);
+                         history.replace(from);
+
                     })
                     .catch((err) => {
                          const userInfo = { ...user };
