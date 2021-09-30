@@ -108,7 +108,6 @@ const Login = () => {
                          // handleNullValue();
                          setLoggedInUser(userInfo);
                          history.replace(from);
-
                     })
                     .catch((err) => {
                          const userInfo = { ...user };

@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 
-import Destination from "./components/Destination/Destination";
+import Book from "./components/Book/Book";
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound'
@@ -29,7 +29,7 @@ const App = () => {
           <Route path='/home' component={Home} />
           <Route path='/login' component={Login} />
           <PrivateRoute path='/book/:vehicleType' >
-            <Destination></Destination>
+            <Book></Book>
           </PrivateRoute>
           <Route path='*' component={NotFound} />
         </Switch>

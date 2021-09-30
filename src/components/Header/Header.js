@@ -2,8 +2,10 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import './Header.css'
+import { useParams } from 'react-router';
 
 const Header = () => {
+     const { vehicleType } = useParams();
      const linkActiveStyle = {
           color: 'white',
           marginLeft: '30px',
@@ -18,7 +20,7 @@ const Header = () => {
                     <Nav >
                          <NavLink to="/home" style={linkActiveStyle}>Home</NavLink>
                          <NavLink to="/login" style={linkActiveStyle}>Login</NavLink>
-                         <NavLink to="/book" style={linkActiveStyle}>Destination</NavLink>
+                         <NavLink to="/" style={linkActiveStyle}>Destination</NavLink>
                     </Nav>
 
                </Navbar>
