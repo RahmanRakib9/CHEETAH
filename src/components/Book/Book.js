@@ -5,18 +5,30 @@ import { useParams } from 'react-router';
 import { UserContext } from '../../App';
 import Gmap from '../Gmap/Gmap';
 import './Book.css';
+import giphy from '../../image/giphy.gif';
+
 
 const Destination = () => {
      const { vehicleType } = useParams();
      const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
      const { register, handleSubmit, watch, formState: { errors } } = useForm();
-     const onSubmit = data => console.log(data);
-     console.log(watch("example")); // watch input value by passing the name of it
+
+
+     const onSubmit = data => {
+          if (data.name && data.email && data.phone) {
+               document.getElementById('bookingPage').style.display = 'none';
+               document.getElementById('id').style.display = 'block';
+          }
+     }
 
      return (
           <Container style={{ marginTop: "5%" }}>
-               <div className="row">
+               <div style={{ display: 'none', textAlign: 'center' }} id='id'>
+                    <small style={{ color: 'white' }}>Congratulation Your {vehicleType} is on the way,till then please wait</small>
+                    <img src={giphy} alt="" />
+               </div>
+               <div className="row" id='bookingPage'>
                     <div className="col-md-4 d-flex justify-content-center">
                          <form onSubmit={handleSubmit(onSubmit)} className='ship-form'>
                               <h4 style={{ color: 'white', textAlign: "center" }}>Let's Book a {vehicleType}</h4>
@@ -29,7 +41,7 @@ const Destination = () => {
                               <input {...register("phone", { required: true })} placeholder="Your Phone Number" />
                               {errors.phone && <span className='error'>Phone Number is Required</span>}
 
-                              <input type="submit" />
+                              <input type="submit" id='submitBtn' />
                          </form>
                     </div>
                     <div className="col-md-8 d-flex justify-content-center">
@@ -41,5 +53,3 @@ const Destination = () => {
 };
 
 export default Destination;
-// {/*
-// <h2>howdy {loggedInUser.email}</h2> */}

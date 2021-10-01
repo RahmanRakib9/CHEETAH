@@ -8,6 +8,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import '../../App.css'
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
+import PassInstructions from './PassInstructions';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -105,7 +106,6 @@ const Login = () => {
                          userInfo.userSuccess = true;
                          userInfo.userError = '';
                          setUser(userInfo);
-                         // handleNullValue();
                          setLoggedInUser(userInfo);
                          history.replace(from);
                     })
@@ -121,14 +121,9 @@ const Login = () => {
 
      return (
           <Container>
-               <div className='row' style={{ marginTop: '10%' }}>
+               <div className='row d-flex justify-content-center' style={{ marginTop: '10%' }}>
                     <div className="col-md-2">
-                         <ul style={{ color: "white", backgroundColor: '#1a1a1a', borderRadius: '5%' }}>
-                              <li><small>Passwords must be at least 6 characters.</small></li>
-                              <li><small>Passwords must be contain at least 1 numeric digit <span style={{ color: 'orange' }}>(Example: abcdef7)</span></small></li>
-                              <li><small>Email address should be valid.</small></li>
-                              <li><small> <a href="https://www.facebook.com/ra.kib.9655806" target='_blank' style={{ color: 'white' }}>Need help?</a></small></li>
-                         </ul>
+                         {newUser && <PassInstructions></PassInstructions>}
                     </div>
                     <div className="col-md-10">
                          <div style={{ textAlign: "center" }}>

@@ -1,0 +1,9 @@
+#btnStyle {
+     margin-left: 30px;
+     font-weight: "bold";
+     background-color: #1a1a1a;
+     color: white;
+     border: none;
+     font-weight: "bold";
+     cursor: pointer;
+}
