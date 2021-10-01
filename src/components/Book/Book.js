@@ -24,9 +24,9 @@ const Destination = () => {
 
      return (
           <Container style={{ marginTop: "5%" }}>
-               <div style={{ display: 'none', textAlign: 'center' }} id='id'>
-                    <small style={{ color: 'white' }}>Congratulation Your {vehicleType} is on the way,till then please wait</small>
-                    <img src={giphy} alt="" />
+               <div style={{ display: 'none', textAlign: 'center', marginBottom: '100px' }} id='id'>
+                    <h3 style={{ color: 'white', textAlign: 'center' }}>Congratulations  Your {vehicleType} is on the way,till then please wait</h3>
+                    <img src={giphy} style={{ width: '100%',height:"600px" }} alt="" />
                </div>
                <div className="row" id='bookingPage'>
                     <div className="col-md-4 d-flex justify-content-center">
