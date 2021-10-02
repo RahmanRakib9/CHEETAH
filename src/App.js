@@ -21,9 +21,6 @@ const App = () => {
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
         <Header />
-        <p style={{ color: 'red ' }}>
-          email: {loggedInUser.userEmail}
-        </p>
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/home' component={Home} />
