@@ -26,16 +26,16 @@ const Destination = () => {
           <Container style={{ marginTop: "5%" }}>
                <div style={{ display: 'none', textAlign: 'center', marginBottom: '100px' }} id='id'>
                     <h3 style={{ color: 'white', textAlign: 'center' }}>Congratulations  Your {vehicleType} is on the way,till then please wait</h3>
-                    <img src={giphy} style={{ width: '100%',height:"600px" }} alt="" />
+                    <img src={giphy} style={{ width: '100%', height: "600px" }} alt="" />
                </div>
                <div className="row" id='bookingPage'>
                     <div className="col-md-4 d-flex justify-content-center">
                          <form onSubmit={handleSubmit(onSubmit)} className='ship-form'>
                               <h4 style={{ color: 'white', textAlign: "center" }}>Let's Book a {vehicleType}</h4>
-                              <input defaultValue={loggedInUser.name} {...register("name", { required: true })} placeholder="Your Name" />
+                              <input defaultValue={loggedInUser.name || loggedInUser.userName} {...register("name", { required: true })} placeholder="Your Name" />
                               {errors.name && <span className='error'>Name is Required</span>}
 
-                              <input defaultValue={loggedInUser.email} {...register("email", { required: true })} placeholder="Your Email" />
+                              <input defaultValue={loggedInUser.email || loggedInUser.userEmail} {...register("email", { required: true })} placeholder="Your Email" />
                               {errors.email && <span className='error'>Email is Required</span>}
 
                               <input {...register("phone", { required: true })} placeholder="Your Phone Number" />
