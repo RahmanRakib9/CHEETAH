@@ -3,7 +3,7 @@ If user click on book button,user will taken to the sign in page for sign in or 
 
 
 
-## Features
+## Technology Used
 
 - React
 - React-Router-Dom
