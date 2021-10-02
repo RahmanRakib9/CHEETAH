@@ -3,8 +3,6 @@ import { Container, Nav, Navbar, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { UserContext } from '../../App';
 import './Header.css'
-import { useHistory, useLocation } from 'react-router';
-
 
 const Header = () => {
      const linkActiveStyle = {
@@ -15,11 +13,7 @@ const Header = () => {
      }
      //use context
      const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-     const history = useHistory();
-     const handleSignUp = () => {
-          history.push('/login')
-     }
-
+    
      return (
           <Container>
                <Navbar >
@@ -28,11 +22,10 @@ const Header = () => {
                     <Nav >
                          <NavLink to="/home" style={linkActiveStyle}>Home</NavLink>
                          <NavLink to="/login" style={linkActiveStyle}>Sign in</NavLink>
-                         {/* <NavLink to="/login" style={linkActiveStyle}>Log Out</NavLink> */}
-                          {
-                              loggedInUser.email ? <button id='btnStyle' onClick={() => setLoggedInUser({})}>SignOut</button> : <button id='btnStyle' onClick={handleSignUp}>Sign up</button>
-                         } 
-                        {/* <button id='btnStyle'> <p style={{ color: 'white' }}>{loggedInUser.email}</p></button> */}
+                         {
+                              loggedInUser.email && <button id='btnStyle' onClick={() => setLoggedInUser({})}>Sign Out</button>
+                         }
+
                     </Nav>
 
                </Navbar>

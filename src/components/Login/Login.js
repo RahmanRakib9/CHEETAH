@@ -33,6 +33,7 @@ const Login = () => {
      let location = useLocation();
      let { from } = location.state || { from: { pathname: "/" } };
 
+     //handle google login
      const GoogleSignIn = () => {
           const provider = new GoogleAuthProvider();
           const auth = getAuth();
@@ -58,6 +59,7 @@ const Login = () => {
           document.getElementById('userPassword').value = '';
      }
 
+     //form validation using regEx
      const handleBlur = (e) => {
           let isFieldValid = true;
           if (e.target.name === 'email') {
@@ -85,7 +87,7 @@ const Login = () => {
                          userInfo.userSuccess = true;
                          userInfo.userError = '';
                          setUser(userInfo);
-                         handleNullValue();
+                         // handleNullValue();
                          setLoggedInUser(userInfo);
                          history.replace(from);
 
@@ -154,11 +156,4 @@ const Login = () => {
 };
 
 export default Login;
-// <button onClick={GoogleSignIn}>Login With Google</button>
-// {
-//      user.userLogin && <div>
-//           <h1>How are you doing {user.userName} ?</h1>
-//           <img src={user.userPhoto} alt="" />
-//           <p>{user.userEmail}</p>
-//      </div>
-// }
+

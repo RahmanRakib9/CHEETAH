@@ -7,14 +7,13 @@ import Gmap from '../Gmap/Gmap';
 import './Book.css';
 import giphy from '../../image/giphy.gif';
 
-
 const Destination = () => {
      const { vehicleType } = useParams();
-     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+     const [loggedInUser, setLoggedInUser] = useContext(UserContext); //use context
 
-     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+     const { register, handleSubmit, watch, formState: { errors } } = useForm(); //hook form
 
-
+     //form input validation
      const onSubmit = data => {
           if (data.name && data.email && data.phone) {
                document.getElementById('bookingPage').style.display = 'none';
@@ -24,10 +23,14 @@ const Destination = () => {
 
      return (
           <Container style={{ marginTop: "5%" }}>
+
+               {/* display confirmation message */}
                <div style={{ display: 'none', textAlign: 'center', marginBottom: '100px' }} id='id'>
                     <h3 style={{ color: 'white', textAlign: 'center' }}>Congratulations  Your {vehicleType} is on the way,till then please wait</h3>
                     <img src={giphy} style={{ width: '100%', height: "600px" }} alt="" />
                </div>
+
+               {/* react hook form && google map */}
                <div className="row" id='bookingPage'>
                     <div className="col-md-4 d-flex justify-content-center">
                          <form onSubmit={handleSubmit(onSubmit)} className='ship-form'>

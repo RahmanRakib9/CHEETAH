@@ -4,23 +4,20 @@
           "img": "https://i.ibb.co/ZfPmZJm/shutterstock-1526149508-3.jpg",
           "description": "standard for one person",
           "capacity": "1",
-          "id": "1",
-          "price": "199"
+          "id": "1"
      },
      {
           "name": "Car",
           "img": "https://i.ibb.co/DKdJLSP/car1.jpg",
           "description": "perfectly equipped for traveling couples or friends.",
           "capacity": "3",
-          "id": "2",
-          "price": "550"
+          "id": "2"
      },
      {
           "name": "Minibus",
           "img": "https://i.ibb.co/7kDjffh/minibus1.jpg",
           "description": "standard for traveling with family",
           "capacity": "6",
-          "id": "3",
-          "price": "1200"
+          "id": "3"
      }
 ]

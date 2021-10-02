@@ -6,16 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
 
 const Vehicle = (props) => {
-     const { img, name, capacity, price,description } = props.x;
+     const { img, name, capacity, description } = props.x;
+
      const history = useHistory();
      const handleClick = (vehicleId) => {
           history.push(`/book/${vehicleId}`)
      }
+     
      return (
           <Container >
                <Col className='d-flex justify-content-center align-items-center'>
 
-                    <Card style={{ width: '22rem', marginTop: "3%",height:'28rem' }} >
+                    <Card style={{ width: '22rem', marginTop: "3%", height: '28rem' }} >
                          <Card.Img variant="top" src={img} style={{ width: "100%", height: "250px" }} />
                          <Card.Body>
                               <Card.Title>{name}</Card.Title>
@@ -34,4 +36,3 @@ const Vehicle = (props) => {
 };
 
 export default Vehicle;
-//className='d-flex align-items-center justify-content-center'

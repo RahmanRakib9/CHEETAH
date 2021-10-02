@@ -14,7 +14,6 @@ const center = {
 function Gmap() {
      const { isLoaded } = useJsApiLoader({
           id: 'pk.eyJ1IjoicmFraWI5IiwiYSI6ImNrdTc5ZnM4czI2MWMyb28xN3IxZjZybXoifQ.wuAKF3BUssizCXnAM-NZ2g',
-          // googleMapsApiKey: ""
      })
 
      const [map, setMap] = React.useState(null)
