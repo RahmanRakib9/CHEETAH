@@ -39,7 +39,9 @@ const Login = () => {
           const auth = getAuth();
           signInWithPopup(auth, provider)
                .then((res) => {
+                    console.log('res is',res);
                     const { displayName, email, photoURL } = res.user;
+                    console.log(displayName, email, photoURL);
                     const userInfo = {
                          userLogin: true,
                          userName: displayName,
@@ -47,7 +49,7 @@ const Login = () => {
                          userPhoto: photoURL
                     }
                     setUser(userInfo);
-                    setLoggedInUser(userInfo);
+                    // setLoggedInUser(userInfo);
                     history.replace(from);
                })
      }
@@ -145,10 +147,10 @@ const Login = () => {
                               user.userSuccess ? <p style={{ color: 'green', textAlign: 'center' }}>"Succsessfully {newUser ? 'Created' : 'LoggedIn'}!"</p> : <p style={{ color: 'red', textAlign: 'center' }}>{user.userError}</p>
                          }
 
-                         <p style={{ textAlign: 'center', color: 'white' }}>OR</p>
+                         {/* <p style={{ textAlign: 'center', color: 'white' }}>OR</p>
                          <div className='d-flex justify-content-center align-items-center'>
                               <Button variant="secondary" size="lg" onClick={GoogleSignIn} ><FontAwesomeIcon icon={faGoogle} /> Login With Google</Button>
-                         </div>
+                         </div> */}
                     </div>
                </div>
           </Container>
