@@ -12,7 +12,6 @@ If user click on book button,user will taken to the sign in page for sign in or 
 - Firebase Authentication 
 - React-Hook-Form
 - Mapbox
-- @react-google-maps/api
 - Font-Awesome
 - Netlify for hoisting
  
