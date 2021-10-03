@@ -17,7 +17,6 @@ const Header = () => {
      return (
           <Container>
                <Navbar >
-
                     <NavLink to="/" style={{ color: 'white', fontWeight: 'bold', textDecoration: 'none' }}>CHEETAH</NavLink>
                     <Nav >
                          <NavLink to="/home" style={linkActiveStyle}>Home</NavLink>
@@ -27,7 +26,6 @@ const Header = () => {
                          }
 
                     </Nav>
-
                </Navbar>
           </Container>
      );

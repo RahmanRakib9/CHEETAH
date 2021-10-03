@@ -1,10 +1,8 @@
 import React, { useContext, useState } from 'react';
 import firebase from 'firebase/compat/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseConfig from './FirebaseConfig';
 import { Form, Button, Container } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import '../../App.css'
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
@@ -32,27 +30,6 @@ const Login = () => {
      let history = useHistory();
      let location = useLocation();
      let { from } = location.state || { from: { pathname: "/" } };
-
-     //handle google login
-     const GoogleSignIn = () => {
-          const provider = new GoogleAuthProvider();
-          const auth = getAuth();
-          signInWithPopup(auth, provider)
-               .then((res) => {
-                    console.log('res is',res);
-                    const { displayName, email, photoURL } = res.user;
-                    console.log(displayName, email, photoURL);
-                    const userInfo = {
-                         userLogin: true,
-                         userName: displayName,
-                         userEmail: email,
-                         userPhoto: photoURL
-                    }
-                    setUser(userInfo);
-                    // setLoggedInUser(userInfo);
-                    history.replace(from);
-               })
-     }
 
      //null value
      function handleNullValue() {
@@ -130,10 +107,6 @@ const Login = () => {
                          {newUser && <PassInstructions></PassInstructions>}
                     </div>
                     <div className="col-md-10">
-                         <div style={{ textAlign: "center" }}>
-                              <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} />
-                              <label htmlFor="newUser" style={{ color: 'white' }}>{newUser ? 'Create a account' : 'Dont have any account?'}</label>
-                         </div>
                          <Form style={{ color: 'white', }} onSubmit={handleFormSubmit}>
                               {newUser && <Form.Label>Name</Form.Label>}
                               {newUser && <Form.Control type="text" name='name' required placeholder="Enter Your Name" onBlur={handleBlur} id='userName' />}
@@ -143,14 +116,15 @@ const Login = () => {
                               <Form.Control type="password" name='password' required placeholder="Enter Your Password" onBlur={handleBlur} id='userPassword' />
                               <Button variant='secondary' type='submit' style={{ marginTop: "10px" }}>{newUser ? 'Submit' : 'LogIn'}</Button>
                          </Form>
+
+                         <div style={{ marginTop: "25px" }}>
+                              <input type="checkbox" name="newUser" onChange={() => setNewUser(!newUser)} id='newUser' />
+                              <label htmlFor="newUser" style={{ color: 'white' }} id='newUser'>{newUser ? ' Create a account' : ' Dont have any account?'}</label>
+                         </div>
+
                          {
                               user.userSuccess ? <p style={{ color: 'green', textAlign: 'center' }}>"Succsessfully {newUser ? 'Created' : 'LoggedIn'}!"</p> : <p style={{ color: 'red', textAlign: 'center' }}>{user.userError}</p>
                          }
-
-                         {/* <p style={{ textAlign: 'center', color: 'white' }}>OR</p>
-                         <div className='d-flex justify-content-center align-items-center'>
-                              <Button variant="secondary" size="lg" onClick={GoogleSignIn} ><FontAwesomeIcon icon={faGoogle} /> Login With Google</Button>
-                         </div> */}
                     </div>
                </div>
           </Container>
